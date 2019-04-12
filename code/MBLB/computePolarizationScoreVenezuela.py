@@ -16,12 +16,14 @@ def Model(G,corenode,tol=10**-5,save_xi=True):
 
     N=len(G.nodes())
 #    print N
-
+	
+    for node_name in G.nodes():
+        G.node[node_name]['index'] = list(G.nodes()).index(node_name)
     #Get de adjacency matrix
     Aij = sp.lil_matrix((N,N))
 #    print Aij.shape
     for o,d in G.edges():
-        Aij[o,d]=1
+        Aij[G.node[o]['index'],G.node[d]['index']]=1
 
     #Build the vectors with users opinions
     macro_v_current=[]
@@ -29,7 +31,7 @@ def Model(G,corenode,tol=10**-5,save_xi=True):
     v_new = []
     dict_nodes = {};
     for nodo in G.nodes():
-	dict_nodes[G.node[nodo]['label']] = G.node[nodo]['ideo'];
+        dict_nodes[nodo] = G.node[nodo]['ideo'];
         v_current.append(G.node[nodo]['ideo'])
         v_new.append(0.0)
 
@@ -45,7 +47,7 @@ def Model(G,corenode,tol=10**-5,save_xi=True):
     #Do as many times as required for convergence
     while notconverged > 0:
         times=times+1
-	print >> sys.stderr, times;
+        print >> sys.stderr, times;
         t=time.time()
         
         #for all nodes apart from corenode, calculate opinion as average of neighbors
@@ -59,6 +61,7 @@ def Model(G,corenode,tol=10**-5,save_xi=True):
        
         #update opinion
         for j in corenode:
+            print j
             v_new[j]=v_current[j]
 
         diff=np.abs(v_current-v_new)
@@ -112,7 +115,7 @@ def GetPolarizationIndex(ideos):
 
 #G = networkx.read_gml("external_datasets/Twitter_data_venezuela/data_files_gml/r_chavez_4.gml");
 #G = networkx.read_gml("gml_files/" + file2 + ".gml");
-G = networkx.read_gml("gml_files/follower_network/" + file2 + ".gml");
+G = networkx.read_gml("gml_files/" + file2 + ".gml");
 ideos = networkx.get_node_attributes(G,'ideo');
 
 corenode = [];

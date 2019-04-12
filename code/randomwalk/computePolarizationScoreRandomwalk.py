@@ -17,7 +17,7 @@ percent = float(sys.argv[3])/100;
 # G = nx.read_weighted_edgelist('political_blogs_largest_CC.txt',delimiter=',');
 G = nx.read_weighted_edgelist(filename,delimiter=',');
 
-f1 = open("../communities_retweet_networks/community1_" + file2 + ".txt");
+f1 = open("..\communities_retweet_networks\community1_" + file2 + ".txt");
 #f1 = open("../communities_follow_networks/community1_" + file2 + ".txt");
 lines1 = f1.readlines();
 left = [];
@@ -28,7 +28,7 @@ for line in lines1:
 	left.append(line);
 	dict_left[line] = 1;
 
-f2 = open("../communities_retweet_networks/community2_" + file2 + ".txt");
+f2 = open("..\communities_retweet_networks\community2_" + file2 + ".txt");
 #f2 = open("../communities_follow_networks/community2_" + file2 + ".txt");
 lines2 = f2.readlines();
 right = [];
@@ -38,7 +38,7 @@ for line in lines2:
 	line = line.strip();
 	right.append(line);
 	dict_right[line] = 1;
-
+    
 def getRandomNodes(G,k): # parameter k = number of random nodes to generate
 	nodes = G.nodes();
 	random_nodes = {};
@@ -125,7 +125,7 @@ def performRandomWalk(G,starting_node,user_nodes_side1,user_nodes_side2): # retu
 
 	while(flag!=1):
 		# print "starting from ", starting_node, "num nodes visited ", len(dict_nodes.keys()), " out of ", len(nodes);
-		neighbors = G.neighbors(starting_node);
+		neighbors = list(G.neighbors(starting_node));
 		random_num = random.randint(0,len(neighbors)-1);
 		starting_node = neighbors[random_num];
 		dict_nodes[starting_node] = 1;
@@ -153,7 +153,7 @@ def performRandomWalkFull(G,starting_node,user_nodes): # returns the number of s
 
 	while(flag!=1):
 		# print "starting from ", starting_node, "num nodes visited ", len(dict_nodes.keys()), " out of ", len(nodes);
-		neighbors = G.neighbors(starting_node);
+		neighbors = list(G.neighbors(starting_node));
 		random_num = random.randint(0,len(neighbors)-1);
 		starting_node = neighbors[random_num];
 		dict_nodes[starting_node] = 1;
@@ -203,15 +203,14 @@ for j in range(1,1000):
 
 	num_repetitions = 100; # number of repetitions, should change
 	total_steps = [];
-
+	
 	user_nodes_left_list = user_nodes_left.keys();
 	for i in range(len(user_nodes_left_list)-1):
-#		node = getRandomNodes(G,1).keys()[0];
+        #		node = getRandomNodes(G,1).keys()[0];
 		node = user_nodes_left_list[i];
 		other_nodes = user_nodes_left_list[:i] + user_nodes_left_list[i+1:];
 		other_nodes_dict = getDict(other_nodes);
 		side = performRandomWalk(G,node,other_nodes_dict,user_nodes_right);
-		print side;
 		if(side=="left"):
 			left_left += 1;
 		elif(side=="right"):

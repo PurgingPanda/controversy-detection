@@ -37,7 +37,7 @@ for line in lines2:
 	dict_right[line] = 1;
 
 #f3 = open("force_directed/" + file2 + "_positions.txt");
-f3 = open("force_directed/follower_network/" + file2 + "_positions.txt");
+f3 = open("retweet_network/" + file2 + "_positions.txt");
 #f3 = open("LinLogLayout/" + file2 + "_positions.txt");
 lines3 = f3.readlines();
 

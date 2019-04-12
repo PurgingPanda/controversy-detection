@@ -38,6 +38,7 @@ for i in range(len(lines1)):
 	name1 = lines1[i].strip();
 	for j in range(len(lines2)):
 		name2 = lines2[j].strip();
+		#print name1 in G[name2]
 		if(G.has_edge(name1,name2)):
 			if(dict_edgebetweenness.has_key(name1+","+name2)):
 				edge_betweenness = dict_edgebetweenness[name1+","+name2];
@@ -68,7 +69,7 @@ for line in lines:
 	eb_list_all.append(float(line_split[2]));
 
 eb_list_all1 = np.asarray(eb_list_all);
-print stats.entropy(eb_list,eb_list_all);
+#print stats.entropy(eb_list,eb_list_all);
 print "Ratio of edge betweenness", np.median(eb_list1)/np.median(eb_list_all1);
 
 """

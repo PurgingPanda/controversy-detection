@@ -51,6 +51,7 @@ def forceatlas2_layout(G, iterations=10, linlog=False, pos=None, nohubs=False,
     dt = t / float(iterations + 1)
     displacement = np.zeros((dim, nnodes))
     for iteration in range(iterations):
+        print iteration
         displacement *= 0
         # loop over rows
         for i in range(A.shape[0]):
@@ -88,7 +89,7 @@ if __name__ == "__main__":
 	FW = nx.read_weighted_edgelist(filename, create_using=nx.Graph(), delimiter=",")
 	positions = forceatlas2_layout(FW, linlog=False, nohubs=False, iterations=1000)
 #	out = open(file2 + "_positions.txt","w");
-	out = open("follower_network/" + file2 + "_positions.txt","w");
+	out = open("retweet_network/" + file2 + "_positions.txt","w+");
 #    print positions
 	for keys in positions.keys():
 		try:

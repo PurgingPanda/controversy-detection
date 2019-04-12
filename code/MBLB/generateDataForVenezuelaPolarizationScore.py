@@ -24,7 +24,7 @@ seed_nodes_num = int(len(G.nodes())*0.05); # seed nodes percenatage = 5 percent
 #seed_nodes_num = 1;
 print >> sys.stderr, "selecting ", seed_nodes_num, " seed nodes from each side";
 
-f1 = open("communities/community1_" + file2 + ".txt");
+f1 = open("../communities_retweet_networks/community1_" + file2 + ".txt");
 #f1 = open("communities_follower_network/community1_" + file2 + ".txt");
 lines1 = f1.readlines();
 left = [];
@@ -35,7 +35,7 @@ for line in lines1:
 	left.append(line);
 	dict_left[line] = 1;
 
-f2 = open("communities/community2_" + file2 + ".txt");
+f2 = open("../communities_retweet_networks/community2_" + file2 + ".txt");
 #f2 = open("communities_follower_network/community2_" + file2 + ".txt");
 lines2 = f2.readlines();
 right = [];
