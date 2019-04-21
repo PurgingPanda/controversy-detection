@@ -17,7 +17,7 @@ percent = float(sys.argv[3])/100;
 # G = nx.read_weighted_edgelist('political_blogs_largest_CC.txt',delimiter=',');
 G = nx.read_weighted_edgelist(filename,delimiter=',');
 
-f1 = open("..\communities_retweet_networks\community1_" + file2 + ".txt");
+f1 = open("../communities_retweet_networks/community1_" + file2 + ".txt");
 #f1 = open("../communities_follow_networks/community1_" + file2 + ".txt");
 lines1 = f1.readlines();
 left = [];
@@ -28,7 +28,7 @@ for line in lines1:
 	left.append(line);
 	dict_left[line] = 1;
 
-f2 = open("..\communities_retweet_networks\community2_" + file2 + ".txt");
+f2 = open("../communities_retweet_networks/community2_" + file2 + ".txt");
 #f2 = open("../communities_follow_networks/community2_" + file2 + ".txt");
 lines2 = f2.readlines();
 right = [];
@@ -38,7 +38,7 @@ for line in lines2:
 	line = line.strip();
 	right.append(line);
 	dict_right[line] = 1;
-    
+
 def getRandomNodes(G,k): # parameter k = number of random nodes to generate
 	nodes = G.nodes();
 	random_nodes = {};
@@ -203,7 +203,7 @@ for j in range(1,1000):
 
 	num_repetitions = 100; # number of repetitions, should change
 	total_steps = [];
-	
+
 	user_nodes_left_list = user_nodes_left.keys();
 	for i in range(len(user_nodes_left_list)-1):
         #		node = getRandomNodes(G,1).keys()[0];
@@ -231,7 +231,7 @@ for j in range(1,1000):
 			continue;
 	if(j%1==0):
 		print >> sys.stderr, j;
-	
+
 print "left -> left", left_left;
 print "left -> right", left_right;
 print "right -> right", right_right;
