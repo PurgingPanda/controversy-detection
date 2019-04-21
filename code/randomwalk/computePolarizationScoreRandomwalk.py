@@ -242,26 +242,11 @@ e2 = left_right*1.0/(left_right+right_right);
 e3 = right_left*1.0/(left_left+right_left);
 e4 = right_right*1.0/(left_right+right_right);
 
-print "\n********************" + file2 + " -- % seed nodes " + str(percent) + " *********************";
-print e1, e2;
-print e3, e4;
+Pll = left_left / (left_left + right_left)
+Prr = right_right / (left_right + right_right)
+Plr = left_right / (left_right + right_right)
+Prl = right_left / (left_left + right_left)
+RWC = Pll * Prr - Prl * Plr
 
-print e1*e4 - e2*e3;
-print "--------------------------------------";
+print("RWC ", RWC)
 
-"""
-p_e1 = dict_degree[file2];
-p_e2 = 1 - p_e1;
-
-e1_x = (e1*p_e1)/0.5;
-e2_x = (e2*p_e2)/0.5;
-e3_x = (e3*p_e1)/0.5;
-e4_x = (e4*p_e2)/0.5;
-
-print "--------------------------------------";
-
-print e1_x, e3_x;
-print e2_x, e4_x;
-
-print e1_x*e4_x - e2_x*e3_x;
-"""
